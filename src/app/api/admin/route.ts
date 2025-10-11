@@ -15,7 +15,7 @@ export async function GET(req:Request) {
     return NextResponse.json(admin)
 }
 
-export async function PATCH(req: Request, { params }: { params: { id: string } }) {
+export async function PATCH(req: Request,) {
 
   const body = await req.json()
   try {

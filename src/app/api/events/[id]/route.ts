@@ -123,7 +123,7 @@ export async function PATCH(req: NextRequest, context: { params: { id: string } 
 }
 
 // ------------------ DELETE ------------------
-export async function DELETE(req: NextRequest, context: { params: { id: string } }) {
+export async function DELETE(_req: NextRequest, context: { params: { id: string } }) {
   const { params } = await context; 
   const id = await params.id;
 
