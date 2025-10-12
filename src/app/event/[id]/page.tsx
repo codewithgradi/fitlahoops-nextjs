@@ -22,7 +22,7 @@ type Event = {
 
 const EventDynamicPage = async ({ params }: Props) => {
   const { id } = await params;
-  const res = await fetch(`http://localhost:3000/api/events/${id}`);
+  const res = await fetch(`/api/events/${id}`,{cache:"no-store"});
   if (!res.ok) throw new Error("Could not fetch data");
 
   const data: Event = await res.json();
