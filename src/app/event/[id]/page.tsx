@@ -6,6 +6,7 @@ import React from 'react'
 interface Props {
   params: Promise<{id:string}>
 }
+export const dynamic = 'force-dynamic'
 
 type EventCategory = 'BEHIND_SCENES' | 'TOURNAMENTS' | 'LEAGUES';
 
