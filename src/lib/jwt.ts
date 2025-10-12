@@ -2,7 +2,7 @@ import jwt, { Secret } from "jsonwebtoken";
 
 const JWT_SECRET: Secret = process.env.JWT_SECRET || "1709064c083f64d7c6b86e44cd086468";
 
-type JWTPayload = { [key: string]: any };
+type JWTPayload = { [key: string]: string };
 
 // Sign a JWT
 export function signJWT(payload: JWTPayload, expiresIn: string | number = "1d"): string {

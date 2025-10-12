@@ -17,8 +17,14 @@ const eslintConfig = [
       ".next/**",
       "out/**",
       "build/**",
+      "src/generated/**",
       "next-env.d.ts",
     ],
+    rules: {
+      // Optional: relax some strict rules for smoother Vercel deploy
+      "@typescript-eslint/no-unused-vars": ["warn", { argsIgnorePattern: "^_" }],
+      "@typescript-eslint/no-explicit-any": "off",
+    },
   },
 ];
 

@@ -12,7 +12,7 @@ export function createToken(payload: object) {
 export function verifyToken(token: string) {
   try {
     return jwt.verify(token, JWT_SECRET) as JwtPayload;
-  } catch (err) {
+  } catch  {
     return null;
   }
 }

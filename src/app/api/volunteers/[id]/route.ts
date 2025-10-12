@@ -40,7 +40,7 @@ export async function PATCH(req: Request,  context : { params: Promise<{ id: str
     const reason = formData.get("reason")?.toString();
 
     
-    let dataToUpdate: any = {};
+    const dataToUpdate: any = {};
     if (fullname) dataToUpdate.fullname = fullname;
     if (email) dataToUpdate.email = email;
     if (role) {

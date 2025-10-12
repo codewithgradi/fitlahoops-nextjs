@@ -1,0 +1,16 @@
+# Node modules
+node_modules/
+
+# Next.js build output
+.next/
+out/
+build/
+
+# Prisma generated files
+src/generated/
+
+# TypeScript environment file
+next-env.d.ts
+
+# Optional: ignore log files
+*.log

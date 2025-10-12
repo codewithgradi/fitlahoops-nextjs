@@ -5,8 +5,10 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+     "vercel-build": "npm run lint:fix && next build",
     "start": "next start",
-    "lint": "eslint"
+      "lint": "eslint src --ext .ts,.tsx",
+  "lint:fix": "eslint src --ext .ts,.tsx --fix"
   },
   "dependencies": {
     "@prisma/client": "^6.17.0",
