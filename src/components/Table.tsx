@@ -1,23 +1,23 @@
+import prisma from '@/lib/prisma'
 import React from 'react'
 
 type EventCategory = 'BEHIND_SCENES' | 'TOURNAMENTS' | 'LEAGUES'
 
-type Event = {
-  id: string
-  event: string
-  location: string
-  date: string // assuming backend sends ISO string
-  category: EventCategory
-  img: string
-  public_id: string
-  title: string
-  createdAt: string
-  updatedAt: string
-}
+// type Event = {
+//   id: string
+//   event: string
+//   location: string
+//   date: string // assuming backend sends ISO string
+//   category: EventCategory
+//   img: string
+//   public_id: string
+//   title: string
+//   createdAt: string
+//   updatedAt: string
+// }
 
 const Table = async () => {
-  const res = await fetch('http://localhost:3000/api/events') // full URL for server-side fetch
-    const data: Event[] = await res.json()
+    const data = await prisma.event.findMany()
 const upcoming = data.filter(d => new Date(d.date) > new Date());
 
   return (
