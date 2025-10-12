@@ -24,7 +24,7 @@ const ChangePassword = () => {
   }
 
   try {
-    const res = await fetch("http://localhost:3000/api/admin/", {
+    const res = await fetch("/api/admin/", {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
