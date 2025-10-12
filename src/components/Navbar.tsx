@@ -1,8 +1,9 @@
+'use client'
 import Link from 'next/link'
-import React from 'react'
-
+import React, { useState } from 'react'
 
 const Navbar = () => {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   return (
     <nav className='fixed top-0 left-0 w-full z-50 
@@ -15,41 +16,68 @@ const Navbar = () => {
         <p className='text-orange-600 ml-1 transition-colors duration-300'>HOOPS</p>
       </Link>
       
-      <ul className='flex items-center space-x-6 md:space-x-10 text-lg font-medium'>
+      {/* Desktop Menu */}
+      <ul className='hidden md:flex items-center space-x-6 md:space-x-10 text-lg font-medium'>
         <li>
-          <Link 
-            href='#about' 
-            // Apply hover:text-orange-400 for the required effect
-            className='transition-colors duration-300 hover:text-orange-400 active:text-orange-500'
-          >
+          <Link href='#about' className='transition-colors duration-300 hover:text-orange-400 active:text-orange-500'>
             About
           </Link>
         </li>
         <li>
-          <Link 
-            href='#gallery' 
-            className='transition-colors duration-300 hover:text-orange-400 active:text-orange-500'
-          >
+          <Link href='#gallery' className='transition-colors duration-300 hover:text-orange-400 active:text-orange-500'>
             Gallery
           </Link> 
         </li>
         <li>
-          <Link 
-            href='#events' 
-            className='transition-colors duration-300 hover:text-orange-400 active:text-orange-500'
-          >
+          <Link href='#events' className='transition-colors duration-300 hover:text-orange-400 active:text-orange-500'>
             Events
           </Link>
         </li>
         <li>
-          <Link 
-            href='#connect' 
-            className='transition-colors duration-300 hover:text-orange-400 active:text-orange-500'
-          >
+          <Link href='#connect' className='transition-colors duration-300 hover:text-orange-400 active:text-orange-500'>
             Connect
           </Link>
         </li>
       </ul>
+
+      {/* Mobile Hamburger */}
+      <div className='md:hidden'>
+        <button
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          className='focus:outline-none'
+        >
+          <svg className='w-6 h-6' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+            <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2}
+              d={mobileMenuOpen ? 'M6 18L18 6M6 6l12 12' : 'M4 6h16M4 12h16M4 18h16'} />
+          </svg>
+        </button>
+      </div>
+
+      {/* Mobile Menu */}
+      {mobileMenuOpen && (
+        <ul className='absolute top-full left-0 w-full bg-black/90 flex flex-col items-center space-y-4 py-4 text-lg font-medium md:hidden'>
+          <li>
+            <Link href='#about' onClick={() => setMobileMenuOpen(false)} className='transition-colors duration-300 hover:text-orange-400 active:text-orange-500'>
+              About
+            </Link>
+          </li>
+          <li>
+            <Link href='#gallery' onClick={() => setMobileMenuOpen(false)} className='transition-colors duration-300 hover:text-orange-400 active:text-orange-500'>
+              Gallery
+            </Link>
+          </li>
+          <li>
+            <Link href='#events' onClick={() => setMobileMenuOpen(false)} className='transition-colors duration-300 hover:text-orange-400 active:text-orange-500'>
+              Events
+            </Link>
+          </li>
+          <li>
+            <Link href='#connect' onClick={() => setMobileMenuOpen(false)} className='transition-colors duration-300 hover:text-orange-400 active:text-orange-500'>
+              Connect
+            </Link>
+          </li>
+        </ul>
+      )}
     </nav>
   )
 }
