@@ -4,7 +4,7 @@ import Image from 'next/image'
 import React from 'react'
 
 interface Props {
-  params: { id: string }
+  params: Promise<{id:string}>
 }
 
 type EventCategory = 'BEHIND_SCENES' | 'TOURNAMENTS' | 'LEAGUES';
@@ -20,7 +20,7 @@ type Event = {
 }
 
 const EventDynamicPage = async ({ params }: Props) => {
-  const id = await params.id;
+  const { id } = await params;
   const res = await fetch(`http://localhost:3000/api/events/${id}`);
   if (!res.ok) throw new Error("Could not fetch data");
 
