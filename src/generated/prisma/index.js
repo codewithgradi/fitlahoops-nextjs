@@ -87,6 +87,9 @@ Prisma.NullTypes = {
  * Enums
  */
 exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
+  ReadUncommitted: 'ReadUncommitted',
+  ReadCommitted: 'ReadCommitted',
+  RepeatableRead: 'RepeatableRead',
   Serializable: 'Serializable'
 });
 
@@ -131,6 +134,11 @@ exports.Prisma.EventScalarFieldEnum = {
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
+};
+
+exports.Prisma.QueryMode = {
+  default: 'default',
+  insensitive: 'insensitive'
 };
 
 exports.Prisma.NullsOrder = {
@@ -195,18 +203,17 @@ const config = {
   "datasourceNames": [
     "db"
   ],
-  "activeProvider": "sqlite",
-  "postinstall": false,
+  "activeProvider": "postgresql",
   "inlineDatasources": {
     "db": {
       "url": {
-        "fromEnvVar": null,
-        "value": "file:./dev.db"
+        "fromEnvVar": "DATABASE_URL",
+        "value": null
       }
     }
   },
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../src/generated/prisma\"\n}\n\n// datasource db {\n//   provider  = \"postgresql\"\n//   url       = env(\"DATABASE_URL\")\n//   directUrl = env(\"DATABASE_DIRECT_URL\")\n// }\ndatasource db {\n  provider = \"sqlite\"\n  url      = \"file:./dev.db\"\n}\n\nenum VolunteerRole {\n  REFEREE\n  PHOTOGRAPHER\n  LOGISTICS\n  FIRST_AID\n  TECH_SUPPORT\n}\n\nenum EventCategory {\n  BEHIND_SCENES\n  TOURNAMENTS\n  LEAGUES\n}\n\nmodel Admin {\n  id        String   @id @default(cuid())\n  username  String\n  password  String\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n}\n\nmodel Volunteer {\n  id        String        @id @default(cuid())\n  fullname  String\n  email     String        @unique\n  role      VolunteerRole\n  reason    String?\n  createdAt DateTime      @default(now())\n}\n\nmodel Partner {\n  id        String   @id @default(cuid())\n  fullname  String\n  email     String   @unique\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n}\n\nmodel Event {\n  id        String        @id @default(cuid())\n  event     String\n  location  String\n  date      DateTime\n  category  EventCategory\n  img       String\n  public_id String\n  title     String\n  createdAt DateTime      @default(now())\n  updatedAt DateTime      @updatedAt\n}\n",
-  "inlineSchemaHash": "59b2ebc68360755801c7526efa8f77bcf41b27a39763b8ffe093f95a6b701bf5",
+  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../src/generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\n// datasource db {\n//   provider = \"sqlite\"\n//   url      = \"file:./dev.db\"\n// }\n\nenum VolunteerRole {\n  REFEREE\n  PHOTOGRAPHER\n  LOGISTICS\n  FIRST_AID\n  TECH_SUPPORT\n}\n\nenum EventCategory {\n  BEHIND_SCENES\n  TOURNAMENTS\n  LEAGUES\n}\n\nmodel Admin {\n  id        String   @id @default(cuid())\n  username  String\n  password  String\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n}\n\nmodel Volunteer {\n  id        String        @id @default(cuid())\n  fullname  String\n  email     String        @unique\n  role      VolunteerRole\n  reason    String?\n  createdAt DateTime      @default(now())\n}\n\nmodel Partner {\n  id        String   @id @default(cuid())\n  fullname  String\n  email     String   @unique\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n}\n\nmodel Event {\n  id        String        @id @default(cuid())\n  event     String\n  location  String\n  date      DateTime\n  category  EventCategory\n  img       String\n  public_id String\n  title     String\n  createdAt DateTime      @default(now())\n  updatedAt DateTime      @updatedAt\n}\n",
+  "inlineSchemaHash": "b38fdc6b2792f72aa1f636290b62187f031e32ab39fc0361f7c931bc293314a0",
   "copyEngine": true
 }
 
