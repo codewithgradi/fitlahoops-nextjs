@@ -5,7 +5,7 @@ import { prismaRetry } from '@/lib/prismaRetry';
 // ---------------- GET ----------------
 export async function GET(
   _req: Request,
-   context: { params: { id: string } }
+   context: { params: Promise<{ id: string }> }
 ) {
   try {
         const { id } =await context.params;
@@ -26,7 +26,7 @@ export async function GET(
 // ---------------- PATCH ----------------
 export async function PATCH(
   req: Request,
-   context : { params: { id: string } }
+   context : { params: Promise<{ id: string }> }
 ) {
   try {
     const { id } =await context.params;
@@ -57,7 +57,7 @@ export async function PATCH(
 // ---------------- DELETE ----------------
 export async function DELETE(
   _req: Request,
-  context : { params: { id: string } }
+  context : { params: Promise<{ id: string }> }
 ) {
   const { id } = await context.params;
   try {

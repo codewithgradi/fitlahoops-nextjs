@@ -4,7 +4,7 @@ import prisma from '../../../lib/prisma';
 import { prismaRetry } from '@/lib/prismaRetry';
 
 // ------------------- Define Event Categories -------------------
-export const EVENT_CATEGORIES = ['BEHIND_SCENES', 'TOURNAMENTS', 'LEAGUES'] as const;
+const EVENT_CATEGORIES = ['BEHIND_SCENES', 'TOURNAMENTS', 'LEAGUES'] as const;
 export type EventCategory = (typeof EVENT_CATEGORIES)[number];
 
 // ------------------- Configure Cloudinary -------------------
@@ -50,7 +50,6 @@ export const POST = async (req: Request) => {
     }
     const category = categoryValue as EventCategory;
 
-    // ✅ Upload image to Cloudinary
     let uploadedImageUrl = "";
     let publicId = "";
     if (file) {

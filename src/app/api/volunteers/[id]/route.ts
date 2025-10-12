@@ -7,7 +7,7 @@ const ALLOWED_ROLES = ["REFEREE","PHOTOGRAPHER","LOGISTICS","FIRST_AID","TECH_SU
 type VolunteerRole = (typeof ALLOWED_ROLES)[number];
 
 // ---------------- GET ----------------
-export async function GET(_req: Request,  context : { params: { id: string } }) {
+export async function GET(_req: Request,  context : { params: Promise<{ id: string }> }) {
     const { id } =await context.params;
 
   try {
@@ -28,7 +28,7 @@ export async function GET(_req: Request,  context : { params: { id: string } }) 
 }
 
 // ---------------- PATCH ----------------
-export async function PATCH(req: Request,  context : { params: { id: string } }) {
+export async function PATCH(req: Request,  context : { params: Promise<{ id: string }> }) {
     const { id } =await context.params;
 
   try {
@@ -71,7 +71,7 @@ export async function PATCH(req: Request,  context : { params: { id: string } })
 }
 
 // ---------------- DELETE ----------------
-export async function DELETE(_req: Request, context: { params: { id: string } }) {
+export async function DELETE(_req: Request, context: { params: Promise<{ id: string }> }) {
     const { id } =await context.params;
   
   try {
