@@ -65,7 +65,7 @@ const Footer = () => {
               <Link target='_blank' href="https://www.instagram.com/fitla_hoops/" aria-label="Instagram" className="text-gray-400 hover:text-orange-500 transition duration-200">
                 <FaInstagram className="w-6 h-6" />
               </Link>
-              <Link target='_blank' href="http://localhost:3000/admin/auth" aria-label="Instagram" className="text-gray-400 hover:text-orange-500 transition duration-200">
+              <Link target='_blank' href="/admin/auth" aria-label="Instagram" className="text-gray-400 hover:text-orange-500 transition duration-200">
                 <FaUber className="w-6 h-6" />
               </Link>
             </div>
