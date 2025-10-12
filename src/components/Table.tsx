@@ -1,7 +1,7 @@
 import prisma from '@/lib/prisma'
 import React from 'react'
 
-type EventCategory = 'BEHIND_SCENES' | 'TOURNAMENTS' | 'LEAGUES'
+// type EventCategory = 'BEHIND_SCENES' | 'TOURNAMENTS' | 'LEAGUES'
 
 // type Event = {
 //   id: string
