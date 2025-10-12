@@ -1,6 +1,8 @@
 import Footer from '@/components/Footer';
 import NavbarFake from '@/components/NavFake';
+import prisma from '@/lib/prisma';
 import Image from 'next/image'
+import { notFound } from 'next/navigation';
 import React from 'react'
 
 interface Props {
@@ -22,10 +24,16 @@ type Event = {
 
 const EventDynamicPage = async ({ params }: Props) => {
   const { id } = await params;
-  const res = await fetch(`/api/events/${id}`,{cache:"no-store"});
-  if (!res.ok) throw new Error("Could not fetch data");
+  // const res = await fetch(`/api/events/${id}`,{cache:"no-store"});
+  // if (!res.ok) throw new Error("Could not fetch data");
+  
+  const data: Event | null = await prisma.event.findUnique({
+    where:{id:id}
+  });
 
-  const data: Event = await res.json();
+  if (!data) {
+    return notFound()
+  }
 
   return (
     <>
