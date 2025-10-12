@@ -36,7 +36,7 @@ export async function middleware(req: Request) {
   try {
     await jwtVerify(token, new TextEncoder().encode(process.env.JWT_SECRET!));
     return NextResponse.next(); 
-  } catch (error) {
+  } catch {
     return NextResponse.json({ error: "Invalid or expired token" }, { status: 403 });
   }
 }

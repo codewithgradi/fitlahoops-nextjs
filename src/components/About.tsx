@@ -10,7 +10,7 @@ const About = () => {
   return (
     <div id='about' className='bg-emerald-50 my-15 py-15'>
           <h1 className='font-bold text-center py-4 text-4xl'>More than just tournaments</h1>
-          <p className='opacity-45 py-3 text-center'>We're growing sport in our community</p>
+          <p className='opacity-45 py-3 text-center'>We&apos;re growing sport in our community</p>
           <div className='grid grid-cols-3 px-10 gap-x-5 my-10'>
               {data.map(d => (
                   <Counter key={d.id} text={ d.text} number={d.number} />

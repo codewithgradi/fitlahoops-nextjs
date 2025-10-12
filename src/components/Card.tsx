@@ -1,6 +1,7 @@
 'use client'
 import React from 'react'
 import { useRouter } from 'next/navigation'  // App Router
+import Image from 'next/image'
 
 type ImageProps = {
   id: string        // Add the event id
@@ -21,7 +22,9 @@ const Card = ({ id, image, tournament, category }: ImageProps) => {
       onClick={handleClick}
       className='rounded-xl overflow-hidden shadow-xl transform hover:scale-[1.03] transition duration-300 cursor-pointer bg-white'
     >
-      <img 
+      <Image
+        width={1200}
+        height={800}  
         src={image} 
         alt={tournament} 
         className='w-full h-48 object-cover' 

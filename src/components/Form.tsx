@@ -40,13 +40,13 @@ const Form = () => {
     });
 
     if (!res.ok) {
-      const errorData = await res.json();
+      // const errorData = await res.json();
       // console.error("Backend error:", errorData);
       alert('Submission failed. Check console.');
       return;
     }
 
-    const data = await res.json();
+    // const data = await res.json();
     // console.log('Success:', data);
     alert('Form submitted successfully!');
     setFormdata({ fullName: '', email: '', role: '', reason: '' });

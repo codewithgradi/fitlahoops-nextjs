@@ -54,14 +54,16 @@ const EventDynamicPage = async ({ params }: Props) => {
               <span className="font-medium text-gray-700">Date:</span> {new Date(data.date).toLocaleDateString()}
             </p>
               <p className="text-gray-700 leading-relaxed">
-                "Fitla Hoops" is where passion
-                meets performance. We're more than just a brand—we're a community of athletes,
+                &apos;Fitla Hoops&apos; is where passion
+                meets performance. We&apos;re more than just a brand—we&apos;re a community of athletes,
                 dreamers, and game-changers who live and breathe the court.
                 From cutting-edge gear and apparel to innovative training programs,
-                we equip players of all levels to reach their full potential. Whether you're
+                we equip players of all levels to reach their full potential. Whether you&apos;re
                 sinking threes in your driveway or competing in packed arenas, we provide the tools,
-                guidance, and inspiration to elevate every game. At Hoop Dreams, every dribble, every pass,
-                every shot is a step toward greatness. Step onto the court, and let's make every play unforgettable.
+                guidance, and inspiration to elevate every game. At Hoop Dreams, every dribble,
+                every pass,
+                every shot is a step toward greatness.
+                Step onto the court, and let&apos;s make every play unforgettable.
             </p>
           </div>
 

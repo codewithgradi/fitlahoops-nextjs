@@ -6,6 +6,13 @@ import { prismaRetry } from '@/lib/prismaRetry';
 const ALLOWED_ROLES = ["REFEREE","PHOTOGRAPHER","LOGISTICS","FIRST_AID","TECH_SUPPORT"] as const;
 type VolunteerRole = (typeof ALLOWED_ROLES)[number];
 
+type VolunteerUpdate = Partial<{
+  fullname: string;
+  email: string;
+  role: VolunteerRole;
+  reason: string;
+}>;
+
 // ---------------- GET ----------------
 export async function GET(_req: Request,  context : { params: Promise<{ id: string }> }) {
     const { id } =await context.params;
@@ -40,7 +47,7 @@ export async function PATCH(req: Request,  context : { params: Promise<{ id: str
     const reason = formData.get("reason")?.toString();
 
     
-    const dataToUpdate: any = {};
+    const dataToUpdate: VolunteerUpdate = {};
     if (fullname) dataToUpdate.fullname = fullname;
     if (email) dataToUpdate.email = email;
     if (role) {
