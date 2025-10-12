@@ -19,15 +19,23 @@ const ALLOWED_CATEGORIES: EventCategory[] = [
 ];
 
 // ------------------ GET ------------------
-export async function GET(_req: NextRequest, context: { params: { id: string } }) {
-  const { id } = await context.params;
+export async function GET(
+  _req: NextRequest,
+  context: { params: { id: string } }
+) {
+  const { id } = context.params;
 
   if (!id) return NextResponse.json({ message: "Missing ID" }, { status: 400 });
 
   try {
-    const event = await prismaRetry(() => prisma.event.findUnique({ where: { id } }), 5, 1000);
+    const event = await prismaRetry(
+      () => prisma.event.findUnique({ where: { id } }),
+      5,
+      1000
+    );
 
-    if (!event) return NextResponse.json({ message: "Event not found" }, { status: 404 });
+    if (!event)
+      return NextResponse.json({ message: "Event not found" }, { status: 404 });
 
     return NextResponse.json(event);
   } catch (err: unknown) {
@@ -37,8 +45,11 @@ export async function GET(_req: NextRequest, context: { params: { id: string } }
 }
 
 // ------------------ PATCH ------------------
-export async function PATCH(req: NextRequest, context: { params: { id: string } }) {
-  const { id } = await context.params;
+export async function PATCH(
+  req: NextRequest,
+  context: { params: { id: string } }
+) {
+  const { id } = context.params;
 
   if (!id) return NextResponse.json({ message: "Missing ID" }, { status: 400 });
 
@@ -56,7 +67,10 @@ export async function PATCH(req: NextRequest, context: { params: { id: string } 
 
     // Type-safe category
     let category: EventCategory | undefined;
-    if (categoryValue && ALLOWED_CATEGORIES.includes(categoryValue as EventCategory)) {
+    if (
+      categoryValue &&
+      ALLOWED_CATEGORIES.includes(categoryValue as EventCategory)
+    ) {
       category = categoryValue as EventCategory;
     }
 
@@ -76,18 +90,23 @@ export async function PATCH(req: NextRequest, context: { params: { id: string } 
       const arrayBuffer = await file.arrayBuffer();
       const buffer = Buffer.from(arrayBuffer);
 
-      const uploadResponse = await new Promise<{ secure_url: string; public_id: string }>(
-        (resolve, reject) => {
-          const stream = cloudinary.uploader.upload_stream(
-            { folder: "events" },
-            (error, result) => {
-              if (error || !result) reject(error ?? new Error("Upload failed"));
-              else resolve({ secure_url: result.secure_url, public_id: result.public_id });
-            }
-          );
-          stream.end(buffer);
-        }
-      );
+      const uploadResponse = await new Promise<{
+        secure_url: string;
+        public_id: string;
+      }>((resolve, reject) => {
+        const stream = cloudinary.uploader.upload_stream(
+          { folder: "events" },
+          (error, result) => {
+            if (error || !result) reject(error ?? new Error("Upload failed"));
+            else
+              resolve({
+                secure_url: result.secure_url,
+                public_id: result.public_id,
+              });
+          }
+        );
+        stream.end(buffer);
+      });
 
       uploadedImageUrl = uploadResponse.secure_url;
       publicId = uploadResponse.public_id;
@@ -121,14 +140,18 @@ export async function PATCH(req: NextRequest, context: { params: { id: string } 
 }
 
 // ------------------ DELETE ------------------
-export async function DELETE(_req: NextRequest, context: { params: { id: string } }) {
- const { id } = await context.params;
+export async function DELETE(
+  _req: NextRequest,
+  context: { params: { id: string } }
+) {
+  const { id } = context.params;
 
   if (!id) return NextResponse.json({ message: "Missing ID" }, { status: 400 });
 
   try {
     const event = await prisma.event.findUnique({ where: { id } });
-    if (!event) return NextResponse.json({ message: "Event not found" }, { status: 404 });
+    if (!event)
+      return NextResponse.json({ message: "Event not found" }, { status: 404 });
 
     if (event.public_id) await cloudinary.uploader.destroy(event.public_id);
 
