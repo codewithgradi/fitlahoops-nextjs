@@ -5,10 +5,10 @@ import { prismaRetry } from '@/lib/prismaRetry';
 // ---------------- GET ----------------
 export async function GET(
   _req: Request,
-  { params }: { params: { id: string } }
+   context: { params: { id: string } }
 ) {
   try {
-    const { id } = params;
+        const { id } =await context.params;
 
     const partner = await prismaRetry(() => prisma.partner.findUnique({ where: { id } }), 5, 1000);
 
@@ -26,10 +26,10 @@ export async function GET(
 // ---------------- PATCH ----------------
 export async function PATCH(
   req: Request,
-  { params }: { params: { id: string } }
+   context : { params: { id: string } }
 ) {
   try {
-    const { id } = params;
+    const { id } =await context.params;
 
     
     const formData = await req.formData();
@@ -57,10 +57,10 @@ export async function PATCH(
 // ---------------- DELETE ----------------
 export async function DELETE(
   _req: Request,
-  { params }: { params: { id: string } }
+  context : { params: { id: string } }
 ) {
+  const { id } = await context.params;
   try {
-    const { id } = params;
 
     const deleted = await prismaRetry(() => prisma.partner.delete({ where: { id } }), 5, 1000);
 

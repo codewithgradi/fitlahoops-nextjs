@@ -19,9 +19,8 @@ const ALLOWED_CATEGORIES: EventCategory[] = [
 ];
 
 // ------------------ GET ------------------
-export async function GET(req: NextRequest, context: { params: { id: string } }) {
-  const { params } = await context; 
-  const id = params.id;
+export async function GET(_req: NextRequest, context: { params: { id: string } }) {
+  const { id } = await context.params;
 
   if (!id) return NextResponse.json({ message: "Missing ID" }, { status: 400 });
 
@@ -39,8 +38,7 @@ export async function GET(req: NextRequest, context: { params: { id: string } })
 
 // ------------------ PATCH ------------------
 export async function PATCH(req: NextRequest, context: { params: { id: string } }) {
-  const { params } = await context; 
-  const id = params.id;
+  const { id } = await context.params;
 
   if (!id) return NextResponse.json({ message: "Missing ID" }, { status: 400 });
 
@@ -124,8 +122,7 @@ export async function PATCH(req: NextRequest, context: { params: { id: string } 
 
 // ------------------ DELETE ------------------
 export async function DELETE(_req: NextRequest, context: { params: { id: string } }) {
-  const { params } = await context; 
-  const id = await params.id;
+ const { id } = await context.params;
 
   if (!id) return NextResponse.json({ message: "Missing ID" }, { status: 400 });
 

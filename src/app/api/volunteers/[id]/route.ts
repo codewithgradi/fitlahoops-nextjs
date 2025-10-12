@@ -7,10 +7,12 @@ const ALLOWED_ROLES = ["REFEREE","PHOTOGRAPHER","LOGISTICS","FIRST_AID","TECH_SU
 type VolunteerRole = (typeof ALLOWED_ROLES)[number];
 
 // ---------------- GET ----------------
-export async function GET(_req: Request, { params }: { params: { id: string } }) {
+export async function GET(_req: Request,  context : { params: { id: string } }) {
+    const { id } =await context.params;
+
   try {
     const volunteer = await prismaRetry(
-      () => prisma.volunteer.findUnique({ where: { id: params.id } }),
+      () => prisma.volunteer.findUnique({ where: { id: id } }),
       5,
       1000
     );
@@ -26,7 +28,9 @@ export async function GET(_req: Request, { params }: { params: { id: string } })
 }
 
 // ---------------- PATCH ----------------
-export async function PATCH(req: Request, { params }: { params: { id: string } }) {
+export async function PATCH(req: Request,  context : { params: { id: string } }) {
+    const { id } =await context.params;
+
   try {
     
     const formData = await req.formData();
@@ -49,7 +53,7 @@ export async function PATCH(req: Request, { params }: { params: { id: string } }
 
     const updated = await prismaRetry(
       () => prisma.volunteer.update({
-        where: { id: params.id },
+        where: { id: id },
         data: dataToUpdate
       }),
       5,
@@ -57,7 +61,7 @@ export async function PATCH(req: Request, { params }: { params: { id: string } }
     );
 
     if (!updated)
-      return NextResponse.json({ message: `Could not update user with id ${params.id}` }, { status: 404 });
+      return NextResponse.json({ message: `Could not update user with id ${id}` }, { status: 404 });
 
     return NextResponse.json(updated);
   } catch (err: unknown) {
@@ -67,10 +71,12 @@ export async function PATCH(req: Request, { params }: { params: { id: string } }
 }
 
 // ---------------- DELETE ----------------
-export async function DELETE(_req: Request, { params }: { params: { id: string } }) {
+export async function DELETE(_req: Request, context: { params: { id: string } }) {
+    const { id } =await context.params;
+  
   try {
     const volunteer = await prismaRetry(
-      () => prisma.volunteer.delete({ where: { id: params.id } }),
+      () => prisma.volunteer.delete({ where: { id: id } }),
       5,
       1000
     );
